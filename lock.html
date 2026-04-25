@@ -3,306 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <title>⚠️ XINN SYSTEM // DEVICE LOCKED</title>
+    <title>XINN SYSTEM - DEVICE LOCKED</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* ========== CSS CYBERPUNK XINN SYSTEM ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --pink: #ff2d78;
-            --neon-pink: #ff69b4;
-            --purple: #b300ff;
-            --cyan: #00ffff;
-            --green: #00ff88;
-            --black: #0a0005;
-            --red: #ff0040;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: var(--black);
+            background: #0a0005;
             font-family: 'Share Tech Mono', monospace;
             color: #fff;
             overflow: hidden;
             height: 100vh;
-            height: 100dvh;
             width: 100vw;
             user-select: none;
             -webkit-user-select: none;
             -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
         }
-
-        /* ===== MATRIX CANVAS ===== */
         #matrixCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
-            opacity: 0.5;
+            opacity: 0.45;
         }
-
-        /* ===== OVERLAY ===== */
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 15px;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
-
-        /* ===== MAIN CONTAINER ===== */
         .container {
             max-width: 480px;
             width: 100%;
-            background: rgba(10, 0, 5, 0.9);
+            background: rgba(10,0,5,0.92);
             backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 2px solid var(--pink);
+            border: 2px solid #ff2d78;
             border-radius: 20px;
             padding: 25px 20px;
-            box-shadow: 
-                0 0 20px rgba(255, 45, 120, 0.5),
-                0 0 60px rgba(179, 0, 255, 0.3),
-                inset 0 0 20px rgba(255, 105, 180, 0.05);
+            box-shadow: 0 0 30px rgba(255,45,120,0.5), 0 0 60px rgba(179,0,255,0.3);
             animation: borderGlow 2s ease-in-out infinite alternate;
-            position: relative;
         }
-
         @keyframes borderGlow {
-            0% { border-color: var(--pink); box-shadow: 0 0 20px rgba(255,45,120,0.5), 0 0 60px rgba(179,0,255,0.3); }
-            50% { border-color: var(--cyan); box-shadow: 0 0 30px rgba(0,255,255,0.6), 0 0 80px rgba(255,45,120,0.4); }
-            100% { border-color: var(--purple); box-shadow: 0 0 25px rgba(179,0,255,0.5), 0 0 70px rgba(0,255,255,0.3); }
+            0% { border-color: #ff2d78; }
+            50% { border-color: #00ffff; }
+            100% { border-color: #b300ff; }
         }
-
-        /* ===== HEADER ===== */
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         .glitch-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.2rem;
             font-weight: 900;
-            color: var(--pink);
-            text-shadow: 
-                0 0 10px var(--pink),
-                0 0 40px var(--purple),
-                0 0 80px var(--pink);
-            animation: glitch 0.8s infinite;
+            color: #ff2d78;
+            text-shadow: 0 0 10px #ff2d78, 0 0 40px #b300ff;
+            text-align: center;
             letter-spacing: 3px;
-            position: relative;
+            animation: glitch 0.8s infinite;
         }
-
         @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(3px, -3px); }
-            60% { transform: translate(-3px, -3px); }
-            80% { transform: translate(3px, 3px); }
+            0%,100% { transform: translate(0); }
+            20% { transform: translate(-3px,3px); }
+            40% { transform: translate(3px,-3px); }
+            60% { transform: translate(-3px,-3px); }
+            80% { transform: translate(3px,3px); }
         }
-
         .subtitle {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
-            margin-top: 5px;
-            letter-spacing: 2px;
+            color: #ff69b4;
+            text-align: center;
+            margin: 5px 0 20px;
+            text-shadow: 0 0 10px #ff69b4;
         }
-
-        .emoji-spin {
-            display: inline-block;
-            animation: spin 2s linear infinite;
-            font-size: 1.5rem;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* ===== WARNING ===== */
         .warning-box {
-            background: rgba(255, 0, 64, 0.15);
-            border: 1.5px solid var(--red);
+            background: rgba(255,0,64,0.15);
+            border: 1.5px solid #ff0040;
             border-radius: 12px;
             padding: 15px;
             margin: 20px 0;
             text-align: center;
             animation: pulse 1.5s ease-in-out infinite;
         }
-
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,0,64,0.3); }
+            0%,100% { box-shadow: 0 0 5px rgba(255,0,64,0.3); }
             50% { box-shadow: 0 0 35px rgba(255,0,64,0.8); }
         }
-
-        .warning-icon {
-            font-size: 3rem;
-            display: block;
-            animation: bounce 0.5s ease infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-12px); }
-        }
-
         .warning-text {
             color: #ff4444;
             font-weight: bold;
             font-size: 0.85rem;
-            margin: 10px 0;
             line-height: 1.6;
         }
-
         .target-number {
-            color: var(--cyan);
+            color: #00ffff;
             font-size: 1rem;
-            text-shadow: 0 0 10px var(--cyan);
             margin-top: 8px;
+            text-shadow: 0 0 10px #00ffff;
         }
-
-        /* ===== TIMER ===== */
-        .timer-box {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .timer-label {
-            color: var(--cyan);
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-        }
-
+        .timer-box { text-align: center; margin: 20px 0; }
+        .timer-label { color: #00ffff; font-size: 0.75rem; letter-spacing: 3px; }
         .timer {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
-            color: var(--cyan);
-            text-shadow: 0 0 20px var(--cyan);
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
             font-weight: 900;
             margin: 8px 0;
         }
-
-        .timer.warning {
-            color: #ff0000;
-            text-shadow: 0 0 30px #ff0000;
-            animation: pulse 0.5s infinite;
-        }
-
-        /* ===== PAYMENT ===== */
+        .timer.warning { color: #ff0000; text-shadow: 0 0 30px #ff0000; animation: pulse 0.5s infinite; }
         .payment-section {
             background: rgba(0,0,0,0.5);
-            border: 1px solid var(--purple);
+            border: 1px solid #b300ff;
             border-radius: 12px;
             padding: 15px;
             margin: 20px 0;
             text-align: center;
         }
-
-        .payment-label {
-            color: var(--neon-pink);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
         .payment-number {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            color: var(--green);
-            text-shadow: 0 0 15px var(--green);
-            letter-spacing: 2px;
-            word-break: break-all;
+            color: #00ff88;
+            text-shadow: 0 0 15px #00ff88;
         }
-
-        .payment-amount {
-            font-size: 1.3rem;
-            color: #fff;
-            font-weight: bold;
-            margin: 5px 0;
-        }
-
-        .telegram-contact {
-            color: var(--cyan);
-            font-size: 0.85rem;
-            margin-top: 10px;
-        }
-
-        /* ===== PIN INPUT ===== */
-        .pin-section {
-            margin: 25px 0;
-        }
-
-        .pin-label {
-            text-align: center;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            color: var(--cyan);
-            margin-bottom: 15px;
-        }
-
-        .pin-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
+        .telegram-contact { color: #00ffff; font-size: 0.85rem; margin-top: 10px; }
+        .pin-section { margin: 25px 0; }
+        .pin-label { text-align: center; font-size: 0.9rem; letter-spacing: 3px; color: #00ffff; margin-bottom: 15px; }
+        .pin-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .pin-input {
-            width: 48px;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--pink);
+            width: 48px; height: 60px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff2d78;
             border-radius: 12px;
             text-align: center;
             font-size: 1.8rem;
-            color: var(--neon-pink);
+            color: #ff69b4;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            text-shadow: 0 0 15px var(--neon-pink);
+            text-shadow: 0 0 15px #ff69b4;
             outline: none;
-            transition: 0.3s;
             text-transform: uppercase;
-            caret-color: transparent;
         }
-
-        .pin-input:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
-            background: rgba(0, 255, 255, 0.1);
-        }
-
-        .pin-input.filled {
-            border-color: var(--green);
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-        }
-
-        /* ===== BUTTON ===== */
+        .pin-input:focus { border-color: #00ffff; box-shadow: 0 0 25px rgba(0,255,255,0.5); }
         .btn-unlock {
             display: block;
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, var(--pink), var(--purple));
+            background: linear-gradient(135deg, #ff2d78, #b300ff);
             border: none;
             border-radius: 50px;
             color: #fff;
@@ -311,36 +161,11 @@
             font-weight: 700;
             letter-spacing: 3px;
             cursor: pointer;
-            transition: 0.3s;
-            text-shadow: 0 0 5px #fff;
-            box-shadow: 0 0 30px rgba(255, 45, 120, 0.7);
+            box-shadow: 0 0 30px rgba(255,45,120,0.7);
             margin-top: 15px;
         }
-
-        .btn-unlock:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 50px rgba(255, 45, 120, 0.9);
-        }
-
-        .btn-unlock:active {
-            transform: scale(0.97);
-        }
-
-        .btn-unlock:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer-tag {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--purple);
-            margin-top: 15px;
-            opacity: 0.8;
-        }
-
-        /* ===== TOAST ===== */
+        .btn-unlock:active { transform: scale(0.97); }
+        .footer-tag { text-align: center; font-size: 0.7rem; color: #b300ff; margin-top: 15px; }
         .toast {
             position: fixed;
             bottom: 30px;
@@ -353,250 +178,223 @@
             z-index: 1000;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
-            border: 1px solid var(--pink);
+            border: 1px solid #ff2d78;
             box-shadow: 0 0 20px rgba(255,45,120,0.5);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
             text-align: center;
-            max-width: 90%;
         }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ===== MOBILE ===== */
+        .toast.show { transform: translateX(-50%) translateY(0); }
         @media (max-width: 480px) {
             .glitch-title { font-size: 1.6rem; }
             .pin-input { width: 40px; height: 50px; font-size: 1.4rem; }
-            .container { padding: 20px 12px; }
             .timer { font-size: 2rem; }
-            .payment-number { font-size: 1.2rem; }
-        }
-
-        @media (max-width: 350px) {
-            .pin-input { width: 35px; height: 45px; font-size: 1.2rem; }
-            .pin-container { gap: 6px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Matrix Canvas -->
-    <canvas id="matrixCanvas"></canvas>
+<canvas id="matrixCanvas"></canvas>
 
-    <!-- Main Overlay -->
-    <div class="overlay">
-        <div class="container" id="mainContainer">
-            <!-- HEADER -->
-            <div class="header">
-                <h1 class="glitch-title">XINN SYSTEM</h1>
-                <p class="subtitle">
-                    BY XINN IMUT <span class="emoji-spin">😈🌸</span>
-                </p>
-            </div>
+<div class="overlay">
+    <div class="container" id="mainContainer">
+        <h1 class="glitch-title">XINN SYSTEM</h1>
+        <p class="subtitle">BY XINN IMUT 😈🌸</p>
 
-            <!-- WARNING -->
-            <div class="warning-box">
-                <span class="warning-icon">⚠️</span>
-                <p class="warning-text">
-                    PERINGATAN!! DATA ANDA TELAH DIENKRIPSI!<br>
-                    JANGAN RESTART HP ANDA!<br>
-                    SEMUA DATA AKAN HILANG PERMANEN! 😭
-                </p>
-                <p class="target-number" id="targetDisplay">
-                    📱 NOMOR: -
-                </p>
-            </div>
-
-            <!-- TIMER 24 JAM -->
-            <div class="timer-box">
-                <p class="timer-label">⏳ WAKTU TERSISA</p>
-                <p class="timer" id="timer">23:59:59</p>
-            </div>
-
-            <!-- PAYMENT INFO -->
-            <div class="payment-section">
-                <p class="payment-label">💸 TRANSFER KE DANA:</p>
-                <p class="payment-amount">Rp5k/50.000</p>
-                <p class="payment-number" id="danaDisplay">083175050030</p>
-                <p class="telegram-contact" id="teleDisplay">
-                    📞 SUDAH TRANSFER? CHAT TELE :@xinn_93
-                </p>
-            </div>
-
-            <!-- PIN INPUT -->
-            <div class="pin-section">
-                <p class="pin-label">🔐 MASUKKAN PIN UNLOCK</p>
-                <div class="pin-container" id="pinContainer">
-                    <input type="text" class="pin-input" maxlength="1" id="pin1" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <input type="text" class="pin-input" maxlength="1" id="pin2" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <input type="text" class="pin-input" maxlength="1" id="pin3" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <input type="text" class="pin-input" maxlength="1" id="pin4" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <input type="text" class="pin-input" maxlength="1" id="pin5" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-                    <input type="text" class="pin-input" maxlength="1" id="pin6" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-                </div>
-            </div>
-
-            <!-- UNLOCK BUTTON -->
-            <button class="btn-unlock" id="unlockBtn" onclick="checkPIN()">
-                🔓 UNLOCK
-            </button>
-
-            <!-- FOOTER -->
-            <p class="footer-tag">#XinnIsHere ❤️ | XINN SYSTEM v3.0</p>
+        <div class="warning-box">
+            <p class="warning-text">
+                PERINGATAN!! DATA ANDA TELAH DIENKRIPSI!<br>
+                JANGAN RESTART HP ANDA!<br>
+                SEMUA DATA AKAN HILANG PERMANEN! 😭
+            </p>
+            <p class="target-number" id="targetDisplay">NOMOR: -</p>
         </div>
+
+        <div class="timer-box">
+            <p class="timer-label">WAKTU TERSISA</p>
+            <p class="timer" id="timer">23:59:59</p>
+        </div>
+
+        <div class="payment-section">
+            <p style="color:#ff69b4; margin-bottom:8px;">TRANSFER KE DANA:</p>
+            <p style="color:#fff; font-size:1.3rem; font-weight:bold;">Rp50.000</p>
+            <p class="payment-number" id="danaDisplay">-</p>
+            <p class="telegram-contact" id="teleDisplay">SUDAH TRANSFER? CHAT: -</p>
+        </div>
+
+        <div class="pin-section">
+            <p class="pin-label">MASUKKAN PIN UNLOCK</p>
+            <div class="pin-container">
+                <input type="text" class="pin-input" maxlength="1" id="p1" inputmode="text" autocomplete="off">
+                <input type="text" class="pin-input" maxlength="1" id="p2" inputmode="text" autocomplete="off">
+                <input type="text" class="pin-input" maxlength="1" id="p3" inputmode="text" autocomplete="off">
+                <input type="text" class="pin-input" maxlength="1" id="p4" inputmode="text" autocomplete="off">
+                <input type="text" class="pin-input" maxlength="1" id="p5" inputmode="text" autocomplete="off">
+                <input type="text" class="pin-input" maxlength="1" id="p6" inputmode="text" autocomplete="off">
+            </div>
+        </div>
+
+        <button class="btn-unlock" onclick="checkPIN()">UNLOCK</button>
+
+        <p class="footer-tag">#XinnIsHere | XINN SYSTEM v3.0</p>
     </div>
+</div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast"></div>
+<div class="toast" id="toast"></div>
 
-    <script>
-        // ========== KONFIGURASI DARI URL PARAMETER ==========
-        const urlParams = new URLSearchParams(window.location.search);
-        const TARGET_NUMBER = urlParams.get('target') || 'TIDAK DIKETAHUI';
-        const CORRECT_PIN = urlParams.get('pin') || 'XINNIMUT';
-        const DANA_NUMBER = urlParams.get('dana') || '085396340845';
-        const TELEGRAM_USER = urlParams.get('tele') || '@xinnimut';
-
-        // ========== TIMER 24 JAM (86400 DETIK) ==========
-        let timeLeft = 24 * 60 * 60; // 24 jam
-        let alarmPlaying = false;
-
-        // ========== MATRIX BACKGROUND ==========
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const chars = 'ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍXINNSYSTEM😈🌸';
-        const charArr = chars.split('');
-        const fontSize = 14;
-        const columns = Math.floor(canvas.width / fontSize);
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.floor(Math.random() * -canvas.height);
+<script>
+// ========== DEKRIPSI URL PARAMETER ==========
+function decryptData(encBase64) {
+    try {
+        const decoded = atob(encBase64);
+        const parts = decoded.split('::');
+        if (parts.length < 2) return null;
+        const salt = parts[0];
+        let enc = parts.slice(1).join('::');
+        let dec = '';
+        for (let i = 0; i < enc.length; i++) {
+            dec += String.fromCharCode(enc.charCodeAt(i) ^ salt.charCodeAt(i % salt.length));
         }
+        return JSON.parse(dec);
+    } catch(e) { return null; }
+}
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(10, 0, 5, 0.08)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+const urlParams = new URLSearchParams(window.location.search);
+const encData = urlParams.get('d') || '';
 
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#ff2d78');
-            gradient.addColorStop(0.5, '#b300ff');
-            gradient.addColorStop(1, '#ff69b4');
-            ctx.fillStyle = gradient;
-            ctx.shadowColor = '#ff2d78';
-            ctx.shadowBlur = 10;
-            ctx.font = `${fontSize}px "Share Tech Mono"`;
+let TARGET = 'TIDAK DIKETAHUI';
+let PIN = 'XINNIMUT';
+let DANA = '083175050030';
+let TELE = '@xinn_93';
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = charArr[Math.floor(Math.random() * charArr.length)];
-                const x = i * fontSize;
-                const y = drops[i] * fontSize;
-                ctx.fillText(text, x, y);
+if (encData) {
+    const dec = decryptData(encData);
+    if (dec) {
+        TARGET = dec.t || TARGET;
+        PIN = dec.p || PIN;
+        DANA = dec.d || DANA;
+        TELE = dec.tg || TELE;
+    }
+}
 
-                if (y > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
+// ========== UPDATE TAMPILAN ==========
+document.getElementById('targetDisplay').textContent = 'NOMOR: ' + TARGET;
+document.getElementById('danaDisplay').textContent = DANA;
+document.getElementById('teleDisplay').textContent = 'SUDAH TRANSFER? CHAT: ' + TELE;
 
-        setInterval(drawMatrix, 50);
+// ========== MATRIX BACKGROUND ==========
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+const chars = 'XINNSYSTEM😈🌸';
+const drops = [];
+const fontSize = 14;
+const cols = Math.floor(w / fontSize);
+for (let i = 0; i < cols; i++) drops[i] = Math.random() * -100;
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+function draw() {
+    ctx.fillStyle = 'rgba(10,0,5,0.08)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#ff2d78';
+    ctx.shadowColor = '#ff69b4';
+    ctx.shadowBlur = 8;
+    ctx.font = fontSize + 'px "Share Tech Mono"';
+    for (let i = 0; i < drops.length; i++) {
+        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+    }
+}
+setInterval(draw, 50);
+window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
 
-        // ========== UPDATE TAMPILAN DATA TARGET ==========
-        document.getElementById('targetDisplay').textContent = `📱 NOMOR: ${TARGET_NUMBER}`;
-        document.getElementById('danaDisplay').textContent = DANA_NUMBER;
-        document.getElementById('teleDisplay').textContent = `📞 SUDAH TRANSFER? CHAT: ${TELEGRAM_USER}`;
+// ========== TIMER 24 JAM ==========
+let timeLeft = 24 * 60 * 60;
+const timerEl = document.getElementById('timer');
+function updateTimer() {
+    if (timeLeft <= 0) {
+        timerEl.textContent = '00:00:00';
+        clearInterval(timerInt);
+        document.body.style.background = '#ff0000';
+        setTimeout(() => alert('WAKTU HABIS! DATA DIHANCURKAN!'), 500);
+        return;
+    }
+    const hh = Math.floor(timeLeft / 3600);
+    const mm = Math.floor((timeLeft % 3600) / 60);
+    const ss = timeLeft % 60;
+    timerEl.textContent = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+    if (timeLeft <= 3600) timerEl.classList.add('warning');
+    timeLeft--;
+}
+const timerInt = setInterval(updateTimer, 1000);
 
-        // ========== TIMER COUNTDOWN ==========
-        function updateTimer() {
-            const timerEl = document.getElementById('timer');
-            const hours = Math.floor(timeLeft / 3600);
-            const minutes = Math.floor((timeLeft % 3600) / 60);
-            const seconds = timeLeft % 60;
-            
-            timerEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+// ========== PIN HANDLER ==========
+const inputs = document.querySelectorAll('.pin-input');
+inputs.forEach((inp, i) => {
+    inp.addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+        if (this.value && i < 5) inputs[i+1].focus();
+    });
+    inp.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && !this.value && i > 0) inputs[i-1].focus();
+    });
+    inp.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const paste = (e.clipboardData || window.clipboardData).getData('text').toUpperCase();
+        inputs.forEach((inp2, j) => { if (paste[j]) inp2.value = paste[j]; });
+        if (paste.length > 0 && paste.length <= 6) inputs[Math.min(paste.length, 5)].focus();
+    });
+});
 
-            // Warning saat < 1 jam
-            if (timeLeft <= 3600) {
-                timerEl.classList.add('warning');
-            }
+// ========== CHECK PIN ==========
+function checkPIN() {
+    let entered = '';
+    inputs.forEach(i => entered += i.value.toUpperCase());
+    if (entered.length < 6) return showToast('MASUKKAN 6 DIGIT PIN!');
+    if (entered === PIN) {
+        clearInterval(timerInt);
+        document.body.innerHTML = `<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0a0005;text-align:center;font-family:'Orbitron',sans-serif;padding:20px;"><div><h1 style="color:#00ff88;font-size:3rem;text-shadow:0 0 30px #00ff88;">TERBUKA!</h1><p style="color:#fff;font-size:1.2rem;margin:20px 0;">SELAMAT! DATA ANDA AMAN.<br>XINN SYSTEM TELAH DINONAKTIFKAN.</p><p style="color:#ff69b4;font-size:1.5rem;">BY XINN IMUT 😈🌸</p></div></div>`;
+        if (navigator.vibrate) navigator.vibrate([200,100,200]);
+    } else {
+        showToast('PIN SALAH! COBA LAGI!');
+        document.getElementById('mainContainer').style.animation = 'none';
+        document.getElementById('mainContainer').offsetHeight;
+        document.getElementById('mainContainer').style.animation = 'shake 0.6s ease';
+        inputs.forEach(i => i.value = '');
+        inputs[0].focus();
+        if (navigator.vibrate) navigator.vibrate([300,100,300]);
+    }
+}
 
-            // Time's up
-            if (timeLeft <= 0) {
-                timerEl.textContent = "00:00:00";
-                clearInterval(timerInterval);
-                document.body.style.background = '#ff0000';
-                document.body.style.transition = 'background 0.5s';
-                setTimeout(() => {
-                    alert('⏰ WAKTU HABIS! DATA ANDA TELAH DIHANCURKAN! 💀');
-                }, 500);
-                return;
-            }
+// ========== TOAST ==========
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
 
-            timeLeft--;
-        }
+// ========== SECURITY ==========
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+        return false;
+    }
+});
+console.log = console.warn = console.error = console.clear = function() {};
+history.pushState(null, '', location.href);
+window.onpopstate = function() { history.pushState(null, '', location.href); showToast('TIDAK ADA JALAN KELUAR! BAYAR!'); };
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
 
-        const timerInterval = setInterval(updateTimer, 1000);
+// ========== INIT ==========
+inputs[0].focus();
+document.addEventListener('click', function reqFS() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+}, { once: true });
+</script>
 
-        // ========== PIN INPUT HANDLER ==========
-        const pinInputs = document.querySelectorAll('.pin-input');
-        
-        pinInputs.forEach((input, index) => {
-            input.addEventListener('input', function(e) {
-                const value = this.value.toUpperCase();
-                this.value = value;
-                
-                if (value.length >= 1) {
-                    this.classList.add('filled');
-                    // Auto move ke next input
-                    if (index < pinInputs.length - 1) {
-                        pinInputs[index + 1].focus();
-                    }
-                } else {
-                    this.classList.remove('filled');
-                }
-            });
-
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && this.value === '' && index > 0) {
-                    pinInputs[index - 1].focus();
-                    pinInputs[index - 1].classList.remove('filled');
-                }
-            });
-
-            // Handle paste
-            input.addEventListener('paste', function(e) {
-                e.preventDefault();
-                const pastedText = (e.clipboardData || window.clipboardData).getData('text').toUpperCase();
-                const chars = pastedText.split('');
-                pinInputs.forEach((inp, i) => {
-                    if (chars[i]) {
-                        inp.value = chars[i];
-                        inp.classList.add('filled');
-                    }
-                });
-                const lastFilled = Math.min(chars.length, pinInputs.length) - 1;
-                if (lastFilled >= 0 && lastFilled < pinInputs.length) {
-                    pinInputs[lastFilled].focus();
-                }
-            });
-        });
-
-        // ========== CHECK PIN ==========
-        function checkPIN() {
-            let enteredPIN = '';
-            pinInputs.forEach(input => {
-                enteredPIN += input.value.toUpperCase();
-            });
-
-            if (enteredPIN.length < 6) {
-                showToast('❌ MASUKKAN
+</body>
+</html>
