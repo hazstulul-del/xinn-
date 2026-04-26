@@ -3,579 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>XINN SYSTEM // COMMAND CENTER</title>
+    <title>XINN SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --pink: #ff2d78;
-            --neon-pink: #ff69b4;
-            --purple: #b300ff;
-            --cyan: #00ffff;
-            --green: #00ff88;
-            --black: #0a0005;
-            --red: #ff0040;
-            --yellow: #ffdd00;
-        }
-
+        :root { --pink: #ff2d78; --neon-pink: #ff69b4; --purple: #b300ff; --cyan: #00ffff; --green: #00ff88; --red: #ff0040; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            background: var(--black);
-            font-family: 'Share Tech Mono', monospace;
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            background: #0a0005; font-family: 'Share Tech Mono', monospace; color: #fff;
+            min-height: 100vh; overflow-x: hidden;
         }
-
-        #matrixCanvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.4;
-        }
-
-        /* ===== LOGIN PAGE ===== */
-        .login-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .login-box {
-            background: rgba(10,0,5,0.92);
-            backdrop-filter: blur(25px);
-            border: 2px solid var(--pink);
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 0 40px rgba(255,45,120,0.5), 0 0 80px rgba(179,0,255,0.3);
-            animation: borderGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes borderGlow {
-            0% { border-color: var(--pink); }
-            50% { border-color: var(--cyan); }
-            100% { border-color: var(--purple); }
-        }
-
-        .login-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--pink);
-            text-shadow: 0 0 20px var(--pink), 0 0 40px var(--purple);
-            text-align: center;
-            letter-spacing: 4px;
-            animation: glitch 1s infinite;
-        }
-
-        @keyframes glitch {
-            0%,100% { transform: translate(0); }
-            20% { transform: translate(-3px,3px); }
-            40% { transform: translate(3px,-3px); }
-            60% { transform: translate(-2px,-2px); }
-            80% { transform: translate(2px,2px); }
-        }
-
-        .login-subtitle {
-            color: var(--neon-pink);
-            text-align: center;
-            font-size: 0.85rem;
-            margin: 8px 0 25px;
-        }
-
-        .login-input {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(0,0,0,0.6);
-            border: 2px solid var(--pink);
-            border-radius: 12px;
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            text-align: center;
-            letter-spacing: 8px;
-            outline: none;
-            transition: 0.3s;
-            margin-bottom: 20px;
-        }
-
-        .login-input:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 25px rgba(0,255,255,0.5);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--pink), var(--purple));
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 3px;
-            box-shadow: 0 0 30px rgba(255,45,120,0.7);
-            transition: 0.3s;
-        }
-
-        .login-btn:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(255,45,120,0.9); }
-        .login-btn:active { transform: scale(0.97); }
-
-        .login-error {
-            color: var(--red);
-            text-align: center;
-            margin-top: 15px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            display: none;
-        }
-
-        /* ===== MAIN PANEL ===== */
-        .main-panel {
-            display: none;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .panel-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,45,120,0.3);
-        }
-
-        .panel-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--pink);
-            text-shadow: 0 0 20px var(--pink), 0 0 40px var(--purple);
-            letter-spacing: 3px;
-        }
-
-        .panel-subtitle {
-            color: var(--neon-pink);
-            font-size: 0.8rem;
-            margin-top: 5px;
-        }
-
-        /* ===== ANIME BANNER ===== */
-        .anime-banner {
-            width: 100%;
-            height: 180px;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            border: 2px solid var(--purple);
-            box-shadow: 0 0 30px rgba(179,0,255,0.4);
-            position: relative;
-        }
-
-        .anime-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: bannerFloat 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes bannerFloat {
-            0% { transform: scale(1) translateY(0); }
-            100% { transform: scale(1.05) translateY(-5px); }
-        }
-
-        .banner-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(10,0,5,0.9));
-            padding: 15px;
-            text-align: center;
-        }
-
-        .banner-text {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--cyan);
-            font-size: 1rem;
-            text-shadow: 0 0 15px var(--cyan);
-            letter-spacing: 2px;
-        }
-
-        /* ===== SECTION CARD ===== */
-        .section-card {
-            background: rgba(10,0,5,0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--purple);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(179,0,255,0.2);
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--cyan);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 0 0 10px var(--cyan);
-            letter-spacing: 2px;
-        }
-
-        .input-group {
-            margin-bottom: 18px;
-        }
-
-        .input-group label {
-            display: block;
-            color: var(--neon-pink);
-            font-size: 0.8rem;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--pink);
-            border-radius: 10px;
-            color: #fff;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-group select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ff2d78' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            cursor: pointer;
-        }
-
-        .input-group input:focus, .input-group select:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 20px rgba(0,255,255,0.3);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 3px;
-            transition: 0.3s;
-            margin: 8px 0;
-        }
-
-        .btn-execute {
-            background: linear-gradient(135deg, var(--red), #cc0030);
-            box-shadow: 0 0 25px rgba(255,0,64,0.6);
-        }
-
-        .btn-execute:hover { transform: scale(1.03); box-shadow: 0 0 45px rgba(255,0,64,0.9); }
-        .btn-execute:active { transform: scale(0.97); }
-
-        .btn-lock {
-            background: linear-gradient(135deg, var(--pink), var(--purple));
-            box-shadow: 0 0 25px rgba(255,45,120,0.6);
-        }
-
-        .btn-lock:hover { transform: scale(1.03); box-shadow: 0 0 45px rgba(255,45,120,0.9); }
-        .btn-lock:active { transform: scale(0.97); }
-
-        .btn-logout {
-            background: transparent;
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            box-shadow: none;
-            font-size: 0.75rem;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .btn-logout:hover { background: rgba(0,255,255,0.1); }
-
-        .terminal {
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            max-height: 250px;
-            overflow-y: auto;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.78rem;
-            display: none;
-        }
-
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.35; }
+        .main-panel { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 30px 20px; border-bottom: 1px solid rgba(255,45,120,0.3); margin-bottom: 25px; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 2.3rem; font-weight: 900; color: #ff2d78; text-shadow: 0 0 20px #ff2d78, 0 0 40px #b300ff; letter-spacing: 4px; }
+        .subtitle { color: #ff69b4; font-size: 0.85rem; margin-top: 5px; }
+        .anime-banner { width: 100%; height: 170px; border-radius: 16px; overflow: hidden; margin-bottom: 25px; border: 2px solid #b300ff; box-shadow: 0 0 30px rgba(179,0,255,0.4); position: relative; }
+        .anime-banner img { width: 100%; height: 100%; object-fit: cover; animation: float 4s ease-in-out infinite alternate; }
+        @keyframes float { 0% { transform: scale(1) translateY(0); } 100% { transform: scale(1.05) translateY(-5px); } }
+        .banner-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, #0a0005); padding: 15px; text-align: center; }
+        .banner-text { font-family: 'Orbitron', sans-serif; color: #00ffff; font-size: 0.9rem; text-shadow: 0 0 15px #00ffff; }
+        .card { background: rgba(10,0,5,0.85); backdrop-filter: blur(20px); border: 1px solid #b300ff; border-radius: 16px; padding: 25px; margin-bottom: 25px; }
+        .card-title { font-family: 'Orbitron', sans-serif; color: #00ffff; text-align: center; margin-bottom: 20px; letter-spacing: 2px; }
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; color: #ff69b4; font-size: 0.8rem; margin-bottom: 6px; }
+        .input-group input, .input-group select { width: 100%; padding: 13px 15px; background: rgba(0,0,0,0.6); border: 1px solid #ff2d78; border-radius: 10px; color: #fff; font-family: 'Share Tech Mono', monospace; font-size: 0.95rem; outline: none; }
+        .input-group select { appearance: none; }
+        .input-group input:focus, .input-group select:focus { border-color: #00ffff; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 50px; color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; letter-spacing: 3px; margin: 8px 0; }
+        .btn-go { background: linear-gradient(135deg, #ff0040, #cc0030); box-shadow: 0 0 25px rgba(255,0,64,0.6); }
+        .btn-go:active { transform: scale(0.96); }
+        .terminal { background: #000; border: 1px solid #333; border-radius: 10px; padding: 15px; margin-top: 15px; max-height: 230px; overflow-y: auto; font-size: 0.78rem; display: none; }
         .terminal.show { display: block; }
-
-        .terminal-entry {
-            margin: 4px 0;
-            padding-left: 12px;
-            border-left: 2px solid var(--pink);
-        }
-
-        .terminal-entry.crash { border-left-color: var(--red); color: #ff6666; }
-        .terminal-entry.lock { border-left-color: var(--purple); color: #cc99ff; }
-        .terminal-entry.success { border-left-color: var(--green); color: var(--green); }
-        .terminal-entry.info { border-left-color: var(--cyan); color: var(--cyan); }
-
-        .result-box {
-            background: #000;
-            border: 1px solid var(--cyan);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            display: none;
-            word-break: break-all;
-        }
-
+        .terminal-entry { margin: 4px 0; padding-left: 12px; border-left: 2px solid #ff2d78; }
+        .terminal-entry.crash { border-left-color: #ff0040; color: #ff6666; }
+        .terminal-entry.success { border-left-color: #00ff88; color: #00ff88; }
+        .terminal-entry.info { border-left-color: #00ffff; color: #00ffff; }
+        .result-box { background: #000; border: 1px solid #00ffff; border-radius: 10px; padding: 15px; margin-top: 15px; display: none; word-break: break-all; }
         .result-box.show { display: block; }
-
-        .result-label { color: var(--green); font-size: 0.8rem; margin-bottom: 5px; }
-
-        .result-link {
-            color: var(--cyan);
-            font-size: 0.75rem;
-        }
-
-        .btn-copy {
-            background: transparent;
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            box-shadow: none;
-            font-size: 0.8rem;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .btn-copy:hover { background: rgba(0,255,255,0.1); }
-
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(0,0,0,0.95);
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 50px;
-            z-index: 1000;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            border: 1px solid var(--pink);
-            box-shadow: 0 0 20px rgba(255,45,120,0.5);
-            transition: transform 0.3s;
-            text-align: center;
-        }
-
+        .result-label { color: #00ff88; font-size: 0.8rem; }
+        .result-link { color: #00ffff; font-size: 0.78rem; margin: 8px 0; }
+        .btn-copy { background: transparent; border: 1px solid #00ffff; color: #00ffff; box-shadow: none; font-size: 0.8rem; padding: 10px; margin-top: 5px; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #000; color: #fff; padding: 15px 30px; border-radius: 50px; z-index: 1000; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; border: 1px solid #ff2d78; transition: transform 0.3s; }
         .toast.show { transform: translateX(-50%) translateY(0); }
-
-        @media (max-width: 480px) {
-            .login-logo { font-size: 1.8rem; }
-            .panel-title { font-size: 1.5rem; }
-            .anime-banner { height: 140px; }
-            .section-card { padding: 18px; }
-        }
+        .footer { text-align: center; font-size: 0.7rem; color: #b300ff; margin-top: 20px; padding-bottom: 30px; }
+        @media (max-width: 480px) { .logo { font-size: 1.7rem; } .anime-banner { height: 140px; } }
     </style>
 </head>
 <body>
 
-    <canvas id="matrixCanvas"></canvas>
+<canvas id="matrixCanvas"></canvas>
+<div class="toast" id="toast"></div>
 
-    <div class="toast" id="toast"></div>
+<div class="main-panel">
+    <div class="header">
+        <h1 class="logo">XINN COMMAND</h1>
+        <p class="subtitle">BY XINN IMUT 😈🌸</p>
+    </div>
 
-    <!-- ===== LOGIN PAGE ===== -->
-    <div class="login-page" id="loginPage">
-        <div class="login-box">
-            <h1 class="login-logo">XINN SYSTEM</h1>
-            <p class="login-subtitle">🔐 RESTRICTED ACCESS</p>
-            <input type="password" class="login-input" id="loginPassword" placeholder="PASSWORD" maxlength="20" autocomplete="off">
-            <button class="login-btn" onclick="checkLogin()">MASUK</button>
-            <p class="login-error" id="loginError">PASSWORD SALAH! COBA LAGI!</p>
+    <div class="anime-banner">
+        <img src="https://images.unsplash.com/photo-1607604276583-eef5d763aa60?w=800&q=80" id="animeBanner" alt="Banner">
+        <div class="banner-overlay"><p class="banner-text">⚡ SYSTEM READY ⚡</p></div>
+    </div>
+
+    <div class="card">
+        <p class="card-title">🎯 TARGET CONTROL</p>
+
+        <div class="input-group">
+            <label>📱 NOMOR TARGET</label>
+            <input type="text" id="targetNumber" placeholder="6281234567890">
+        </div>
+
+        <div class="input-group">
+            <label>💥 PILIH AKSI</label>
+            <select id="bugType">
+                <option value="crash_android">🤖 CRASH ANDROID</option>
+                <option value="crash_ios">🍎 CRASH IOS</option>
+                <option value="crash_invisible">👻 CRASH INVISIBLE</option>
+                <option value="forceclose">💢 FORCE CLOSE WA</option>
+                <option value="lock">🔒 LOCK DEVICE</option>
+            </select>
+        </div>
+
+        <button class="btn btn-go" onclick="execute()">🚀 EKSEKUSI</button>
+
+        <div class="terminal" id="terminal"></div>
+
+        <div class="result-box" id="lockResult">
+            <p class="result-label">🔒 LINK LOCK:</p>
+            <p class="result-link" id="lockLink"></p>
+            <button class="btn btn-copy" onclick="copyLock()">📋 COPY LINK</button>
+            <button class="btn btn-copy" onclick="previewLock()">👁️ PREVIEW</button>
         </div>
     </div>
 
-    <!-- ===== MAIN PANEL ===== -->
-    <div class="main-panel" id="mainPanel">
-        <div class="panel-header">
-            <h1 class="panel-title">XINN COMMAND</h1>
-            <p class="panel-subtitle">BY XINN IMUT 😈🌸</p>
-            <button class="btn btn-logout" onclick="logout()">🔒 LOGOUT</button>
-        </div>
+    <p class="footer">#XinnIsHere ❤️ | XINN SYSTEM v4.0</p>
+</div>
 
-        <div class="anime-banner">
-            <img src="https://images.unsplash.com/photo-1607604276583-eef5d763aa60?w=800&q=80" alt="Anime Banner" id="animeBanner">
-            <div class="banner-overlay">
-                <p class="banner-text">⚡ XINN SYSTEM READY ⚡</p>
-            </div>
-        </div>
+<script>
+// ===== CONFIG =====
+const DANA = "083175050030";
+const TELE = "@xinn_93";
+const PIN = "281029";
+let lockLink = '';
 
-        <div class="section-card">
-            <p class="section-title">🎯 TARGET CONTROL</p>
+// ===== MATRIX =====
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+const chars = 'XINNSYSTEM😈🌸ｦｧｨｩｪｫｬｭｮｯｰ';
+const drops = [];
+const fs = 14;
+const cols = Math.floor(w / fs);
+for (let i = 0; i < cols; i++) drops[i] = Math.random() * -100;
+setInterval(() => {
+    ctx.fillStyle = 'rgba(10,0,5,0.08)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#ff2d78';
+    ctx.shadowColor = '#ff69b4';
+    ctx.shadowBlur = 6;
+    ctx.font = fs + 'px "Share Tech Mono"';
+    for (let i = 0; i < drops.length; i++) {
+        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fs, drops[i] * fs);
+        if (drops[i] * fs > h && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+    }
+}, 50);
+window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
 
-            <div class="input-group">
-                <label>📱 NOMOR TARGET</label>
-                <input type="text" id="targetNumber" placeholder="6281234567890">
-            </div>
+// ===== ANIME SLIDESHOW =====
+const animeImgs = [
+    'https://images.unsplash.com/photo-1607604276583-eef5d763aa60?w=800&q=80',
+    'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80',
+    'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=800&q=80',
+    'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80'
+];
+let bIdx = 0;
+setInterval(() => {
+    bIdx = (bIdx + 1) % animeImgs.length;
+    const img = document.getElementById('animeBanner');
+    if (img) img.src = animeImgs[bIdx];
+}, 5000);
 
-            <div class="input-group">
-                <label>💥 TIPE BUG / AKSI</label>
-                <select id="bugType">
-                    <option value="crash_android">🤖 CRASH ANDROID</option>
-                    <option value="crash_ios">🍎 CRASH IOS</option>
-                    <option value="crash_invisible">👻 CRASH INVISIBLE</option>
-                    <option value="forceclose">💢 FORCE CLOSE WA</option>
-                    <option value="lock">🔒 LOCK DEVICE</option>
-                </select>
-            </div>
+// ===== ENCRYPT =====
+function encrypt(data) {
+    const salt = 'XX_' + Math.random().toString(36).substring(2, 6);
+    let enc = salt + '::';
+    for (let i = 0; i < data.length; i++) enc += String.fromCharCode(data.charCodeAt(i) ^ salt.charCodeAt(i % salt.length));
+    return btoa(enc);
+}
 
-            <button class="btn btn-execute" onclick="executeBug()">🚀 EKSEKUSI</button>
+// ===== EXECUTE =====
+function execute() {
+    const target = document.getElementById('targetNumber').value.trim();
+    const type = document.getElementById('bugType').value;
+    if (!target || target.length < 10) return toast('❌ Masukkan nomor valid!');
 
-            <div class="terminal" id="terminal"></div>
+    const term = document.getElementById('terminal');
+    term.classList.add('show');
+    term.innerHTML = '';
+    document.getElementById('lockResult').classList.remove('show');
 
-            <div class="result-box" id="lockResult">
-                <p class="result-label">🔒 LOCK LINK BERHASIL DIBUAT:</p>
-                <p class="result-link" id="lockLink"></p>
-                <button class="btn btn-copy" onclick="copyLockLink()">📋 COPY LINK</button>
-                <button class="btn btn-copy" onclick="previewLock()" style="margin-top:5px;">👁️ PREVIEW</button>
-                <p style="font-size:0.7rem; color:var(--green); margin-top:10px; text-align:center;">🔒 DATA TERENKRIPSI</p>
-            </div>
-        </div>
+    function log(m, c) {
+        const d = document.createElement('div');
+        d.className = 'terminal-entry ' + (c || 'info');
+        d.textContent = '[' + new Date().toLocaleTimeString() + '] ' + m;
+        term.appendChild(d);
+        term.scrollTop = term.scrollHeight;
+    }
 
-        <p style="text-align:center; font-size:0.7rem; color: var(--purple); margin-top:20px; padding-bottom:30px;">
-            #XinnIsHere ❤️ | XINN SYSTEM v4.0
-        </p>
-    </div>
+    if (type === 'lock') {
+        const data = JSON.stringify({ t: target, p: PIN, d: DANA, tg: TELE });
+        lockLink = window.location.origin + '/lock.html?d=' + encodeURIComponent(encrypt(data));
+        log('🔒 MEMBUAT LINK LOCK...', 'crash');
+        log('📱 Target: ' + target);
+        log('💸 Dana: ' + DANA);
+        log('📞 Tele: ' + TELE);
+        setTimeout(() => log('✅ LINK BERHASIL DIBUAT!', 'success'), 500);
+        document.getElementById('lockLink').textContent = lockLink;
+        document.getElementById('lockResult').classList.add('show');
+        toast('🔒 Link Lock Siap!');
+    } else if (type === 'crash_android') {
+        log('🤖 CRASH ANDROID', 'crash');
+        log('📱 Target: ' + target);
+        log('⚙️ Menyusun payload...');
+        setTimeout(() => log('📤 Mengirim overflow characters...', 'crash'), 600);
+        setTimeout(() => log('💥 Payload terkirim!', 'crash'), 1200);
+        setTimeout(() => log('📱 WA target: NOT RESPONDING', 'crash'), 1800);
+        setTimeout(() => log('✅ CRASH ANDROID BERHASIL!', 'success'), 2500);
+        toast('🤖 Crash Android Terkirim!');
+    } else if (type === 'crash_ios') {
+        log('🍎 CRASH IOS', 'crash');
+        log('📱 Target: ' + target);
+        log('⚙️ Menyusun Unicode exploit...');
+        setTimeout(() => log('📤 Kirim payload U+0FE0...', 'crash'), 600);
+        setTimeout(() => log('💥 Payload terkirim!', 'crash'), 1200);
+        setTimeout(() => log('📱 SpringBoard crash!', 'crash'), 1800);
+        setTimeout(() => log('✅ CRASH IOS BERHASIL!', 'success'), 2500);
+        toast('🍎 Crash iOS Terkirim!');
+    } else if (type === 'crash_invisible') {
+        log('👻 CRASH INVISIBLE', 'crash');
+        log('📱 Target: ' + target);
+        log('⚙️ Zero-width exploit...');
+        setTimeout(() => log('📤 Kirim 200x U+200B...', 'crash'), 600);
+        setTimeout(() => log('👻 Tidak terlihat!', 'crash'), 1200);
+        setTimeout(() => log('📱 WA mulai lag...', 'crash'), 1800);
+        setTimeout(() => log('💀 WA CRASH!', 'crash'), 2500);
+        setTimeout(() => log('✅ CRASH INVISIBLE BERHASIL!', 'success'), 3000);
+        toast('👻 Crash Invisible Terkirim!');
+    } else if (type === 'forceclose') {
+        log('💢 FORCE CLOSE WA', 'crash');
+        log('📱 Target: ' + target);
+        log('⚙️ Memory overflow...');
+        setTimeout(() => log('📤 Kirim nested JSON...', 'crash'), 600);
+        setTimeout(() => log('💥 Buffer overflow!', 'crash'), 1200);
+        setTimeout(() => log('📱 WA: FORCE CLOSE', 'crash'), 1800);
+        setTimeout(() => log('✅ FORCE CLOSE BERHASIL!', 'success'), 2500);
+        toast('💢 Force Close Terkirim!');
+    }
+}
 
-    <script>
-        // ===== CONFIG =====
-        const ADMIN_PASSWORD = "XINNIMUT";
-        const FIXED_DANA = "083175050030";
-        const FIXED_TELE = "@xinn_93";
-        const FIXED_LOCK_PIN = "281029";
-
-        let isLoggedIn = false;
-        let generatedLockLink = '';
-
-        // ===== MATRIX BACKGROUND =====
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
-        let w = canvas.width = window.innerWidth;
-        let h = canvas.height = window.innerHeight;
-        const chars = 'XINNSYSTEM😈🌸ｦｧｨｩｪｫｬｭｮｯｰ';
-        const drops = [];
-        const fontSize = 14;
-        const cols = Math.floor(w / fontSize);
-        for (let i = 0; i < cols; i++) drops[i] = Math.random() * -100;
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(10,0,5,0.08)';
-            ctx.fillRect(0, 0, w, h);
-            ctx.fillStyle = '#ff2d78';
-            ctx.shadowColor = '#ff69b4';
-            ctx.shadowBlur = 6;
-            ctx.font = fontSize + 'px "Share Tech Mono"';
-            for (let i = 0; i < drops.length; i++) {
-                ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 50);
-        window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
-
-        // ===== ANIME BANNER SLIDESHOW =====
-        const animeImages = [
-            'https://images.unsplash.com/photo-1607604276583-eef5d763aa60?w=800&q=80',
-            'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80',
-            'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=800&q=80',
-            'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80'
-        ];
-        let currentBanner = 0;
-        setInterval(() => {
-            currentBanner = (currentBanner + 1) % animeImages.length;
-            const bannerImg = document.getElementById('animeBanner');
-            if (bannerImg) bannerImg.src = animeImages[currentBanner];
-        }, 5000);
-
-        // ===== LOGIN SYSTEM =====
-        function checkLogin() {
-            const password = document.getElementById('loginPassword').value;
-            if (password === ADMIN_PASSWORD) {
-                isLoggedIn = true;
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('mainPanel').style.display = 'block';
-                document.getElementById('loginPassword').value = '';
-                document.getElementById('loginError').style.display = 'none';
-                addLog('✅ Akses diberikan. Selamat datang, Xinn.', 'success');
-            } else {
-                document.getElementById('loginError').style.display = 'block';
-                document.getElementById('loginPassword').value = '';
-                shakeElement(document.getElementById('loginPage'));
-            }
-        }
-
-        function logout() {
-            isLoggedIn = false;
-            document.getElementById('loginPage').style.display = 'flex';
-            document.getElementById('mainPanel').style.display = 'none';
-            document.getElementById('terminal').classList.remove('show');
-            document.getElementById('terminal').innerHTML = '';
-            document.getElementById('lockResult').classList.remove('show');
-            generatedLockLink = '';
-        }
-
-        document.getElementById('loginPassword').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkLogin();
-        });
-
-        // ===== ENCRYPT =====
-        function encryptData(data) {
-            const salt = 'XINN_' + Math.random().toString(36).substring(2, 8);
-            let encrypted = salt + '::';
-            for (let i = 0; i < data.length; i++) {
-                encrypted += String.fromCharCode(data.charCodeAt(i) ^ salt.charCodeAt(i % salt.length));
-            }
-            return btoa(encrypted);
-        }
-
-        // ===== EXECUTE BUG =====
-        function executeBug() {
-            if (!isLoggedIn) return;
-
-            const target = document.getElementById('targetNumber').value.trim();
-            const bugType = document.getElementById('bugType').value;
-
-            if (!target || target.length < 10) {
-                showToast('❌ Masukkan nomor target yang valid!');
-                return;
-            }
-
-            const terminal = document.getElementById('terminal');
-            terminal.classList.add('show');
-            terminal.innerHTML = '';
-            document.getElementById('lockResult').classList.remove('show');
-
-            if (bugType === 'lock') {
-                const rawData = JSON.stringify({
-             
+function copyLock() { if (lockLink) navigator.clipboard.writeText(lockLink).then(() => toast('📋 Disalin!')); }
+function previewLock() { if (lockLink) window.open(lockLink, '_blank'); }
+function toast(m) {
+    const t = document.getElementById('toast');
+    t.textContent = m;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
